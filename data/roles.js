@@ -694,6 +694,13 @@ const roleData = {
         "Chooses to light a match during the day to burn doused players to ashes.",
       ],
     },
+    Repenter: {
+      alignment: "Village",
+      description: [
+        "If voted out by the town, they do not get executed.",
+        "Instead, they lose their ability to vote in the village vote.",
+      ],
+    },
 
     //Mafia
     Mafioso: {

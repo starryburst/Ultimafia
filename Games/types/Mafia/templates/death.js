@@ -16,6 +16,7 @@ module.exports = function (type, name) {
     polarised: `${name} met another polarised player.`,
     eaten: `${name} was eaten.`,
     bluebeard: `${name} learned too much about Bluebeard.`,
+    otherAlignment: `${name} visited the wrong people.`,
   };
 
   return templates[type];

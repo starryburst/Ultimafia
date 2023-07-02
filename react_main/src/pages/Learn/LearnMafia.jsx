@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 
-import { RoleSearch } from "../../components/Roles";
-import { PanelGrid } from "../../components/Basic";
+import { RoleSearch } from "../../../components/Roles";
+import { PanelGrid } from "../../../components/Basic";
 
-import "../../css/learn.css";
-
+import "../../../css/learn.css";
 import {
   Paper,
   Table,
@@ -14,7 +13,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { slangList } from "../../json/slangList";
+import { slangList } from "../../../json/slangList";
 
 export default function LearnMafia(props) {
   const gameType = "Mafia";
@@ -265,31 +264,6 @@ export default function LearnMafia(props) {
       name: "Loudmouthed",
       text: "If visited, cries out the identity of players who visited them during the night.",
       icon: <div className="icon modifier modifier-Mafia-Loudmouthed" />,
-    },
-    {
-      name: "Traitorous",
-      text: "If killed by the Mafia, will turn into a Traitor instead.",
-      icon: <div className="icon modifier modifier-Mafia-Traitorous" />,
-    },
-    {
-      name: "Lynchpin",
-      text: "If dead, all aligned players will die too.",
-      icon: <div className="icon modifier modifier-Mafia-Lynchpin" />,
-    },
-    {
-      name: "Friendly",
-      text: "Blocks a player's target in their night action.",
-      icon: <div className="icon modifier modifier-Mafia-Friendly" />,
-    },
-    {
-      name: "Preoccupied",
-      text: "If visited during the night, blocks the player's night action.",
-      icon: <div className="icon modifier modifier-Mafia-Preoccupied" />,
-    },
-    {
-      name: "Steeled",
-      text: "Starts with a knife.",
-      icon: <div className="icon modifier modifier-Mafia-Steeled" />,
     },
   ];
 

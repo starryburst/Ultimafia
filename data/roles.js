@@ -696,6 +696,13 @@ const roleData = {
         "Chooses to light a match during the day to burn doused players to ashes.",
       ],
     },
+    Roommate: {
+      alignment: "Village",
+      description: [
+        "Becomes roommates with one of their neighbors.",
+        "They both share a night meeting with each other."
+      ],
+    },
 
     //Mafia
     Mafioso: {

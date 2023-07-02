@@ -291,6 +291,11 @@ export default function LearnMafia(props) {
       text: "Starts with a knife.",
       icon: <div className="icon modifier modifier-Mafia-Steeled" />,
     },
+    {
+      name: "Soaked",
+      text: "A player visited by a Soaked player learns they were visited by a Soaked player.",
+      icon: <div className="icon modifier modifier-Mafia-Steeled" />,
+    },
   ];
 
   useEffect(() => {

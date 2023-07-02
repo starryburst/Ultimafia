@@ -122,6 +122,7 @@ module.exports = {
       Friendly: ["BlockTargets"],
       Preoccupied: ["BlockIfVisited"],
       Steeled: ["StartWithKnife"],
+      Soaked: ["DripOnVisit"],
     },
     "Split Decision": {},
     Resistance: {},

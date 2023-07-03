@@ -40,7 +40,7 @@ module.exports = class RoomWithNeighbor extends Card {
         meetingName: "Roommate",
         actionName: "End Meeting?",
         states: ["Night"],
-        flags: ["exclusive", "group", "speech", "voting", "noVeg"],
+        flags: ["group", "speech", "voting", "noVeg"],
       },
     };
   }

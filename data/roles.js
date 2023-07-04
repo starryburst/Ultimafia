@@ -702,6 +702,12 @@ const roleData = {
         "Views all messages from the Mafia and Cult meetings anonymously.",
       ],
     },
+    Undertaker: {
+      alignment: "Village",
+      description: [
+        "Learns the role of all players eliminated by the village vote.",
+      ],
+    },
 
     //Mafia
     Mafioso: {

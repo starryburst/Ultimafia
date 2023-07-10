@@ -33,7 +33,7 @@ module.exports = class AcrotopiaGame extends Game {
     this.roundAmt = options.settings.roundAmt;
     this.acronymSize = options.settings.acronymSize;
 
-    this.currentRound = 0;
+    this.currentRound = 1;
     this.currentAcronym = "";
 
     // map from acronym to player
@@ -50,6 +50,10 @@ module.exports = class AcrotopiaGame extends Game {
       this.saveAcronymHistory("name");
       this.emptyAcronymHistory();
       this.generateNewAcronym();
+      this.currentRound += 1;
+      if (this.currentRound == this.roundAmt) {
+        this.currentRound++;
+      }
       return;
     }
 
@@ -65,7 +69,6 @@ module.exports = class AcrotopiaGame extends Game {
         },
       });
 
-      this.currentRound += 1;
       this.queueAction(action);
     }
   }
@@ -195,6 +198,7 @@ module.exports = class AcrotopiaGame extends Game {
       acronymHistory: this.acronymHistory,
       scores: scores,
       currentAcronym: this.currentAcronym,
+      round: this.currentRound-1,
     };
     return info;
   }

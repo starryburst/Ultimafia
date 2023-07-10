@@ -180,6 +180,7 @@ function HistoryKeeper(props) {
           <AcrotopiaHistory
             acronymHistory={extraInfo.acronymHistory}
             currentAcronym={extraInfo.currentAcronym}
+            round={extraInfo.round}
           />
         </>
       }
@@ -190,15 +191,17 @@ function HistoryKeeper(props) {
 function AcrotopiaHistory(props) {
   let acronymHistory = props.acronymHistory;
   let currentAcronym = props.currentAcronym;
+  let round = props.round;
 
   return (
     <>
       <div className="acrotopia">
+      <div className="acrotopia-round-info">
+          <div className="acrotopia-name">Round {round}</div>
+        </div>
         <div className="acrotopia-word-info">
-          <>
-            <div className="acrotopia-name">Current Acronym</div>
-            <div className="acrotopia-input">{currentAcronym}</div>
-          </>
+          <div className="acrotopia-name">Current Acronym</div>
+          <div className="acrotopia-input">{currentAcronym}</div>
         </div>
         <div className="acrotopia-current-history">
           <div className="acrotopia-name">Current Backronyms</div>

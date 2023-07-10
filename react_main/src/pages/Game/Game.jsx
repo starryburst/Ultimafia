@@ -43,7 +43,6 @@ import { textIncludesSlurs } from "../../lib/profanity";
 
 import "../../css/game.css";
 import { adjustColor, flipTextColor } from "../../utils";
-import { Button } from "@mui/material";
 import JottoGame from "./JottoGame";
 
 export default function Game() {
@@ -2014,7 +2013,8 @@ function ActionText(props) {
       textInput = textInput.replace(/[^a-z]/gi, "");
     }
 
-    if (textOptions.alphaOnlySpaces) {
+    if (textOptions.alphaOnlyWithSpaces) {
+      textInput = textInput.replace(/\s\s+/g, " ");
       textInput = textInput.replace(/[^a-z ]/gi, "");
     }
 
@@ -2022,9 +2022,29 @@ function ActionText(props) {
       textInput = textInput.toLowerCase();
     }
 
-    //if (textOptions.enforceAcronym) {
+    if (textOptions.enforceAcronym) {
+      let words = textInput.split(" ");
+      let acceptedWords = [];
+      for (let i in textOptions.enforceAcronym) {
+        if (words.length <= i) {
+          break
+        }
 
-    //}
+        if (words[i].charAt(0).toLowerCase() == textOptions.enforceAcronym.charAt(i).toLowerCase()) {
+          acceptedWords.push(words[i]);
+          continue
+        }
+
+        break;
+      }
+
+      let addSpace = (words.length <= textOptions.enforceAcronym.length) && words[words.length - 1] == ""
+      if (addSpace) {
+        acceptedWords.push("");
+      }
+
+      textInput = acceptedWords.join(" ")
+    }
 
     textInput = textInput.substring(0, maxLength);
     setTextData(textInput);

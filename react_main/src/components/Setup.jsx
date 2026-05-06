@@ -106,7 +106,7 @@ export default function Setup(props) {
   var overSize = false;
 
   if (props.setup.closed && !useRoleGroups) {
-    for (let alignment of Object.keys(rolesDividedByAlignment[0])) {
+    for (let alignment of Object.keys(rolesDividedByAlignment[0] ?? {})) {
       const count = props.setup.count[alignment];
       if (count > 0) {
         roleCounts.push(
@@ -179,7 +179,7 @@ export default function Setup(props) {
   }
 
   function selectSetup(index) {
-    let roleNames = Object.keys(rolesDividedByRoleset[index]);
+    let roleNames = Object.keys(rolesDividedByRoleset[index] ?? {});
     // Filter out events from role display
     const filteredRoleNames = roleNames.filter((role) => {
       const roleName = role.split(":")[0];
@@ -643,7 +643,7 @@ function getRolesByAlignment(siteInfo, gameType, roles) {
         continue;
       }
 
-      for (let roleObj of siteInfo.roles[gameType]) {
+      for (let roleObj of (siteInfo.roles[gameType] ?? [])) {
         if (roleObj.name === roleName) {
           const alignment = roleObj.alignment;
 

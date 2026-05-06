@@ -34,6 +34,16 @@ const protips = {
   Acrotopia: [],
   "Secret Dictator": ["Count the cards!"],
   "Wacky Words": ["Be wacky.", "Be bold.", "Be brave.", "Be funny."],
+  "Draw It": [
+    "Pick the simpler of the two words — clearer drawings score higher.",
+    "Once you've guessed, head to the secret chat to celebrate.",
+    "Make your own word deck for your group's inside jokes.",
+  ],
+  Telephone: [
+    "Write something specific — vague phrases make funnier drawings.",
+    "Watch how your phrase transforms as it passes through everyone.",
+    "The messier the drawing, the funnier the final guess.",
+  ],
   "Liars Dice": [
     "Call it!!!!",
     "99% of gamblers quit before they win big!",
@@ -46,6 +56,12 @@ const protips = {
   ],
   Cheat: ["Count the cards!", "Call It", "Cheaters sometimes prosper!"],
   Ratscrew: ["Count the cards!", "Slap It", "Embrace your inner Pimp!"],
+  "Spot It": [
+    "Be the first to spot the matching symbol!",
+    "Focus on your card first, then scan the center.",
+    "There is always exactly one match between any two cards.",
+    "Speed is everything!",
+  ],
   "Connect Four": [
     "Pay attention to the other players.",
     "Beware of diagonals.",

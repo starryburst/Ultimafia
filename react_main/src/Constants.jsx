@@ -5,6 +5,8 @@ export const GameTypes = [
   "Acrotopia",
   "Secret Dictator",
   "Wacky Words",
+  "Draw It",
+  "Telephone",
   "Liars Dice",
   "Texas Hold Em",
   "Cheat",
@@ -12,6 +14,7 @@ export const GameTypes = [
   "Battlesnakes",
   "Connect Four",
   "Dice Wars",
+  "Spot It",
 ];
 
 // Game types retained for existing setups/stats but no longer creatable or hostable.
@@ -35,6 +38,8 @@ export const Alignments = {
   Acrotopia: ["Town"],
   "Secret Dictator": ["Liberals", "Fascists"],
   "Wacky Words": ["Town", "Host"],
+  "Draw It": ["Town"],
+  Telephone: ["Town"],
   "Liars Dice": ["Liars", "Host"],
   "Texas Hold Em": ["Town", "Host"],
   Cheat: ["Town", "Host"],
@@ -42,6 +47,7 @@ export const Alignments = {
   Battlesnakes: ["Town", "Host"],
   "Connect Four": ["Town"],
   "Dice Wars": ["Army", "Host"],
+  "Spot It": ["Town"],
 };
 
 export const GameStates = {
@@ -57,6 +63,8 @@ export const GameStates = {
     "Special Nomination",
   ],
   "Wacky Words": ["Day", "Night"],
+  "Draw It": ["Pick", "Draw", "Reveal"],
+  Telephone: ["Write", "Draw", "Guess", "Caption", "Vote"],
   "Liars Dice": ["Guess Dice"],
   "Texas Hold Em": ["Place Bets", "Showdown"],
   Cheat: ["Play Cards", "Call Lie"],
@@ -64,6 +72,7 @@ export const GameStates = {
   Battlesnakes: ["Day"],
   "Connect Four": ["Turn"],
   "Dice Wars": ["Play"],
+  "Spot It": ["Round"],
 };
 
 export const RatingThresholds = {

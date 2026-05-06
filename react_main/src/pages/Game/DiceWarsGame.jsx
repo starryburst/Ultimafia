@@ -700,9 +700,13 @@ function DiceWarsBoardWrapper({
                 <h2 style={{ margin: "0 0 16px", fontSize: "22px" }}>
                   Dice Wars
                 </h2>
-                <p style={{ margin: "0 0 24px", fontSize: "15px", lineHeight: 1.5, color: "#CCC" }}>
+                <p style={{ margin: "0 0 16px", fontSize: "15px", lineHeight: 1.5, color: "#CCC" }}>
                   Attack neighboring territories by rolling dice. Keep your
                   territories connected to earn more reinforcements!
+                </p>
+                <p style={{ margin: "0 0 24px", fontSize: "14px", lineHeight: 1.6, color: "#AAA" }}>
+                  reinforcements: N + 3<br />
+                  kill: +5
                 </p>
                 <button
                   onClick={() => setShowIntro(false)}
@@ -723,7 +727,7 @@ function DiceWarsBoardWrapper({
             </div>
           )}
           {/* Game board */}
-          <svg ref={svgRef} style={{ display: "block", margin: "0 auto", width: "100%", maxHeight: "75vh", height: "auto" }} />
+          <svg ref={svgRef} style={{ display: "block", margin: "0 auto", width: "100%", maxHeight: "55vh", height: "auto" }} />
           {/* End Turn button */}
           {!isReview &&
             stateViewing !== -2 &&

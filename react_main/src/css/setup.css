@@ -104,6 +104,10 @@
   background-image: url("/src/images/game_icons/WackyWords.png");
 }
 
+.game-icon.Draw-It {
+  background-image: url("/src/images/game_icons/DrawIt.png");
+}
+
 .game-icon.Liars-Dice {
   background-image: url("/src/images/game_icons/LiarsDice.png");
 }
@@ -130,4 +134,8 @@
 
 .game-icon.Dice-Wars {
   background-image: url("/src/images/game_icons/DiceWars.png");
+}
+
+.game-icon.Spot-It {
+  background-image: url("/src/images/game_icons/SpotIt.png");
 }

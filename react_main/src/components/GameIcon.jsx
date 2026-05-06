@@ -7,6 +7,8 @@ export const gamesIcons = {
   Acrotopia: require("images/game_icons/Acrotopia.png"),
   "Secret Dictator": require("images/game_icons/SecretDictator.png"),
   "Wacky Words": require("images/game_icons/WackyWords.png"),
+  "Draw It": require("images/game_icons/DrawIt.png"),
+  Telephone: require("images/game_icons/Telephone.png"),
   "Liars Dice": require("images/game_icons/LiarsDice.png"),
   "Texas Hold Em": require("images/game_icons/TexasHoldEm.png"),
   Cheat: require("images/game_icons/Cheat.png"),
@@ -14,6 +16,7 @@ export const gamesIcons = {
   Battlesnakes: require("images/game_icons/Battlesnakes.png"),
   "Connect Four": require("images/game_icons/ConnectFour.png"),
   "Dice Wars": require("images/game_icons/DiceWars.png"),
+  "Spot It": require("images/game_icons/SpotIt.png"),
 };
 
 export default function GameIcon(props) {

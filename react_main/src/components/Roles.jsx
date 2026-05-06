@@ -1046,12 +1046,12 @@ export function RoleSearch(props) {
 
   const tabs = Alignments[props.gameType].map((type) => ({ label: type, value: type }));
 
-  if (!siteInfo.tags) return <Loading small />;
-
-  if (!siteInfo.roles) return <Loading small />;
-
   const filteredItems = useMemo(() => {
-    const filtered = siteInfo.roles[props.gameType].filter((role) => {
+    const roles = siteInfo.roles?.[props.gameType];
+    if (!roles?.length) {
+      return [];
+    }
+    const filtered = roles.filter((role) => {
       const searchTerms = searchVal
         .split(",")
         .filter((term) => term.trim() !== "")
@@ -1097,7 +1097,14 @@ export function RoleSearch(props) {
     return [...filtered].sort(compareByName);
   }, [siteInfo.roles, props.gameType, searchVal, roleListType, selectedTagsCount]);
 
-  const tagOptionNames = siteInfo.tags[props.gameType].map((t) => t.name);
+  const tagOptionNames = useMemo(() => {
+    const tagsForGame = siteInfo.tags?.[props.gameType];
+    return tagsForGame?.map((t) => t.name) ?? [];
+  }, [siteInfo.tags, props.gameType]);
+
+  if (!siteInfo.tags) return <Loading small />;
+
+  if (!siteInfo.roles) return <Loading small />;
 
   return (
     <CellSearch
@@ -1261,7 +1268,8 @@ export function GameSettingSearch(props) {
     if (!mods) {
       mods = {};
     }
-    const mappedMods = siteInfo.gamesettings[props.gameType].filter(
+    const settings = siteInfo.gamesettings[props.gameType] ?? [];
+    const mappedMods = settings.filter(
       (t) => t.name in mods
     );
     let temp = [];
@@ -1271,7 +1279,7 @@ export function GameSettingSearch(props) {
       }
     }
     const incompatibles = temp;
-    const modifierOptions = siteInfo.gamesettings[props.gameType]
+    const modifierOptions = settings
       .filter((e) => !e.hidden)
       .filter((e) => e.allowDuplicate || !(e.name in mods))
       .filter((e) => !incompatibles.includes(e.name))
@@ -1280,6 +1288,8 @@ export function GameSettingSearch(props) {
   }
 
   if (!siteInfo.gamesettings) return <Loading small />;
+
+  const gameTypeSettings = siteInfo.gamesettings[props.gameType] ?? [];
 
   const alignButtons = ["Standard", "Voting", "Timer", "Other"].map((type) => (
     <Tab
@@ -1290,7 +1300,7 @@ export function GameSettingSearch(props) {
     />
   ));
 
-  const roleCells = siteInfo.gamesettings[props.gameType].map((role, i) => {
+  const roleCells = gameTypeSettings.map((role, i) => {
     const searchTerms = searchVal
       .split(",")
       .filter((term) => term.trim() !== "")

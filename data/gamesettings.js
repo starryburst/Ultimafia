@@ -312,6 +312,8 @@ const gameSettingData = {
   "Secret Dictator": {},
   "Secret Hitler": {},
   "Wacky Words": {},
+  "Draw It": {},
+  Telephone: {},
   "Liars Dice": {
     Whispers: {
       category: "Standard",
@@ -386,6 +388,7 @@ const gameSettingData = {
   },
   Battlesnakes: {},
   "Dice Wars": {},
+  "Spot It": {},
   "Connect Four": {
     Whispers: {
       category: "Standard",

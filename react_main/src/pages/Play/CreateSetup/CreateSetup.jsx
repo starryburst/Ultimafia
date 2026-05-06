@@ -19,6 +19,8 @@ import CreateJottoSetup from "./CreateJottoSetup";
 import CreateAcrotopiaSetup from "./CreateAcrotopiaSetup";
 import CreateSecretDictatorSetup from "./CreateSecretDictatorSetup";
 import CreateWackyWordsSetup from "./CreateWackyWordsSetup";
+import CreateDrawItSetup from "./CreateDrawItSetup";
+import CreateTelephoneSetup from "./CreateTelephoneSetup";
 import CreateLiarsDiceSetup from "./CreateLiarsDiceSetup";
 import CreateTexasHoldEmSetup from "./CreateTexasHoldEmSetup";
 import CreateCheatSetup from "./CreateCheatSetup";
@@ -26,6 +28,7 @@ import CreateRatscrewSetup from "./CreateRatscrewSetup";
 import CreateBattlesnakesSetup from "./CreateBattlesnakesSetup";
 import CreateDiceWarsSetup from "./CreateDiceWarsSetup";
 import CreateConnectFourSetup from "./CreateConnectFourSetup";
+import CreateSpotItSetup from "./CreateSpotItSetup";
 
 import { ActiveGameTypes, DisabledGameTypes } from "Constants";
 import GameIcon from "components/GameIcon";
@@ -75,6 +78,10 @@ export default function CreateSetup(props) {
         return <CreateSecretDictatorSetup />;
       case "Wacky Words":
         return <CreateWackyWordsSetup />;
+      case "Draw It":
+        return <CreateDrawItSetup />;
+      case "Telephone":
+        return <CreateTelephoneSetup />;
       case "Liars Dice":
         return <CreateLiarsDiceSetup />;
       case "Texas Hold Em":
@@ -89,6 +96,8 @@ export default function CreateSetup(props) {
         return <CreateDiceWarsSetup />;
       case "Connect Four":
         return <CreateConnectFourSetup />;
+      case "Spot It":
+        return <CreateSpotItSetup />;
       default:
         setGameType(defaultGameType);
         return null;

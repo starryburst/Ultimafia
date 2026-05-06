@@ -28,6 +28,8 @@ import HostJotto from "./gameTypeHostForms/HostJotto";
 import HostAcrotopia from "./gameTypeHostForms/HostAcrotopia";
 import HostSecretDictator from "./gameTypeHostForms/HostSecretDictator";
 import HostWackyWords from "./gameTypeHostForms/HostWackyWords";
+import HostDrawIt from "./gameTypeHostForms/HostDrawIt";
+import HostTelephone from "./gameTypeHostForms/HostTelephone";
 import HostLiarsDice from "./gameTypeHostForms/HostLiarsDice";
 import HostTexasHoldEm from "./gameTypeHostForms/HostTexasHoldEm";
 import HostCheat from "./gameTypeHostForms/HostCheat";
@@ -35,6 +37,7 @@ import HostRatscrew from "./gameTypeHostForms/HostRatscrew";
 import HostBattlesnakes from "./gameTypeHostForms/HostBattlesnakes";
 import HostDiceWars from "./gameTypeHostForms/HostDiceWars";
 import HostConnectFour from "./gameTypeHostForms/HostConnectFour";
+import HostSpotIt from "./gameTypeHostForms/HostSpotIt";
 import { useIsPhoneDevice } from "hooks/useIsPhoneDevice";
 import { getSetupBackgroundColor } from "pages/Play/LobbyBrowser/gameRowColors";
 
@@ -60,6 +63,10 @@ export default function HostGameDialogue({ open, setOpen, setup, preSelectedDeck
         return HostSecretDictator();
       case "Wacky Words":
         return HostWackyWords();
+      case "Draw It":
+        return HostDrawIt();
+      case "Telephone":
+        return HostTelephone();
       case "Liars Dice":
         return HostLiarsDice();
       case "Texas Hold Em":
@@ -74,6 +81,8 @@ export default function HostGameDialogue({ open, setOpen, setup, preSelectedDeck
         return HostDiceWars();
       case "Connect Four":
         return HostConnectFour();
+      case "Spot It":
+        return HostSpotIt();
     }
 
     // Fail fast

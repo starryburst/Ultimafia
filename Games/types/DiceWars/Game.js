@@ -486,9 +486,8 @@ module.exports = class DiceWarsGame extends Game {
     }
 
     // Turn-order compensation: later players get bonus dice placed on their territories
-    // bonusDice = ceil(territories_per_player / 4)
-    const territoriesPerPlayer = Math.ceil(numTerritories / numPlayers);
-    const bonusDiceUnit = Math.ceil(territoriesPerPlayer / 4);
+    // Mild ramp: player at index i gets exactly i bonus dice (1 per turn-order position)
+    const bonusDiceUnit = 1;
 
     for (let i = 0; i < numPlayers; i++) {
       this.surplusDice[activePlayers[i].id] = 0;
@@ -721,7 +720,15 @@ module.exports = class DiceWarsGame extends Game {
       );
 
       // Check if defender is eliminated
+      const wasAlive = defender && defender.alive;
       this.checkElimination(defenderId);
+      if (wasAlive && defender && !defender.alive) {
+        // Kill reward: grant up to 5 extra dice on the conquering territory
+        const room = this.maxDicePerTerritory - toTerritory.dice;
+        if (room > 0) {
+          toTerritory.dice += Math.min(5, room);
+        }
+      }
     } else {
       // Defender wins
       fromTerritory.dice = 1;
@@ -919,15 +926,30 @@ module.exports = class DiceWarsGame extends Game {
       }
     }
 
-    // Store surplus dice (max 4x the max dice limit)
-    const maxSurplus = this.maxDicePerTerritory * 4;
-    this.surplusDice[playerId] = Math.min(surplusDice, maxSurplus);
+    // Store surplus dice (max 4x the max dice limit), unless host opted to discard reserves
+    const discardReserve = !!(
+      this.options &&
+      this.options.settings &&
+      this.options.settings.discardReserveDice
+    );
+    if (discardReserve) {
+      this.surplusDice[playerId] = 0;
+    } else {
+      const maxSurplus = this.maxDicePerTerritory * 4;
+      this.surplusDice[playerId] = Math.min(surplusDice, maxSurplus);
+    }
 
     if (bonusDice > 0) {
       const player = this.players.array().find((p) => p.id === playerId);
       let message = `${player.name} received ${bonusDice} bonus dice`;
       if (distributedDice < bonusDice) {
-        message += ` (${distributedDice} placed, ${this.surplusDice[playerId]} stored)`;
+        if (discardReserve) {
+          message += ` (${distributedDice} placed, ${
+            bonusDice - distributedDice
+          } discarded)`;
+        } else {
+          message += ` (${distributedDice} placed, ${this.surplusDice[playerId]} stored)`;
+        }
       }
       this.sendAlert(message);
     }

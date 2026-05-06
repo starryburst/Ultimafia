@@ -11,13 +11,17 @@ const HOST_OPTIONS_VERSIONS = {
   Jotto: 2,
   "Liars Dice": 2,
   Battlesnakes: 2,
-  "Texas Hold Em": 2,
+  "Texas Hold Em": 3,
   Resistance: 2,
   "Secret Dictator": 2,
   "Wacky Words": 2,
+  "Draw It": 2,
   Cheat: 2,
   Ratscrew: 2,
   "Connect Four": 2,
+  "Spot It": 1,
+  Telephone: 1,
+  "Dice Wars": 2,
 };
 
 // Associate all of the existing saved options per game type into a map
@@ -101,11 +105,11 @@ var defaultOptions = {
   },
   "Texas Hold Em": existingHostOptions["Texas Hold Em"] || {
     ...commonHostOptions,
-    startingChips: 50,
+    startingChips: 150,
     minimumBet: 2,
     MaxRounds: 0,
     placeBetsLength: 2,
-    showdownLength: 2,
+    showdownLength: 5,
   },
   Cheat: existingHostOptions["Cheat"] || {
     ...commonHostOptions,
@@ -148,6 +152,18 @@ var defaultOptions = {
     isRankedChoice: false,
     votesToPoints: false,
   },
+  "Draw It": existingHostOptions["Draw It"] || {
+    ...commonHostOptions,
+    lobby: "Games",
+    roundAmt: 3,
+    wordDeckId: "default",
+    drawLength: 60,
+  },
+  Telephone: existingHostOptions["Telephone"] || {
+    ...commonHostOptions,
+    lobby: "Games",
+    drawLength: 90,
+  },
   Battlesnakes: existingHostOptions["Battlesnakes"] || {
     ...commonHostOptions,
     boardSize: 20,
@@ -160,7 +176,8 @@ var defaultOptions = {
     existingHostOptions["DiceWars"] || {
       ...commonHostOptions,
       mapSize: 30,
-      maxDice: 8,
+      maxDice: 20,
+      discardReserveDice: true,
       playLength: 30,
     },
   "Connect Four": existingHostOptions["Connect Four"] || {
@@ -168,6 +185,10 @@ var defaultOptions = {
     boardX: 6,
     boardY: 7,
     turnLength: 1,
+  },
+  "Spot It": existingHostOptions["Spot It"] || {
+    ...commonHostOptions,
+    roundLength: 55,
   },
 };
 

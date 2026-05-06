@@ -1494,6 +1494,15 @@ const countChecks = {
 
     return true;
   },
+  "Draw It": (roles, count, total, closed, unique) => {
+    if (total < 3) return "Draw It needs at least 3 players.";
+
+    const drawItMaxPlayers = 12;
+    if (total > drawItMaxPlayers)
+      return `Draw It allows at most ${drawItMaxPlayers} players.`;
+
+    return true;
+  },
   "Liars Dice": (roles, count, total, closed, unique) => {
     if (total < 2 || total > 50) return "Must have between 2 and 50 players.";
     return true;
@@ -1522,6 +1531,15 @@ const countChecks = {
     if (total > connectFourMaxPlayers)
       return `Must have at most ${connectFourMaxPlayers} players.`;
 
+    return true;
+  },
+  "Spot It": (roles, count, total, closed, unique) => {
+    if (total < 2) return "Must have at least 2 players.";
+    return true;
+  },
+  Telephone: (roles, count, total, closed, unique) => {
+    if (total < 2) return "Telephone needs at least 2 players.";
+    if (total > 12) return "Telephone allows at most 12 players.";
     return true;
   },
 };
@@ -1568,6 +1586,9 @@ const optionsChecks = {
   "Wacky Words": (setup) => {
     return setup;
   },
+  "Draw It": (setup) => {
+    return setup;
+  },
   "Liars Dice": (setup) => {
     return setup;
   },
@@ -1584,6 +1605,12 @@ const optionsChecks = {
     return setup;
   },
   "Connect Four": (setup) => {
+    return setup;
+  },
+  "Spot It": (setup) => {
+    return setup;
+  },
+  Telephone: (setup) => {
     return setup;
   },
 };

@@ -199,6 +199,7 @@ const modifierData = {
   Acrotopia: {},
   "Secret Dictator": {},
   "Wacky Words": {},
+  "Draw It": {},
   "Liars Dice": {
     Gun: {
       internal: ["Gun"],
@@ -211,6 +212,7 @@ const modifierData = {
   Cheat: {},
   Ratscrew: {},
   "Connect Four": {},
+  "Spot It": {},
 };
 
 module.exports = modifierData;

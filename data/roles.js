@@ -6383,6 +6383,37 @@ const roleData = {
       description: ["Can make Prompets/Acronyms", "Facilitates the game."],
     },
   },
+  "Draw It": {
+    Painter: {
+      alignment: "Town",
+      tags: ["None"],
+      description: ["Draws words on their turn and guesses words on others' turns."],
+    },
+  },
+  Telephone: {
+    Caller: {
+      alignment: "Town",
+      tags: ["None"],
+      description: [
+        "Writes a phrase, draws what you receive, and guesses drawings passed to you.",
+      ],
+    },
+    Eidetiker: {
+      alignment: "Town",
+      tags: ["None"],
+      description: [
+        "Draws a prompt, then reproduces the drawing you receive each round.",
+      ],
+    },
+    Designer: {
+      alignment: "Town",
+      tags: ["None"],
+      description: [
+        "Draw a poster, caption someone else's, then vote in head-to-head matchups.",
+        "Win votes to earn points: 2 for a winning drawing, 1 for a winning caption.",
+      ],
+    },
+  },
   "Liars Dice": {
     Liar: {
       alignment: "Liars",
@@ -6529,6 +6560,18 @@ const roleData = {
       tags: ["None"],
       description: ["Can place counters on the board."],
     },
+  },
+  "Spot It": {
+    Steeplejack: {
+      alignment: "Town",
+      tags: ["None"],
+      description: ["Turns the game into The Tower, where players must find the matching symbol with their card!"],
+    },
+    Welldigger: {
+      alignment: "Town",
+      tags: ["None"],
+      description: ["Turns the game into The Well, where players must get rid of their cards first!"],
+    }, 
   },
 };
 

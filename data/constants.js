@@ -76,6 +76,9 @@ module.exports = {
     "Battlesnakes",
     "Dice Wars",
     "Connect Four",
+    "Draw It",
+    "Spot It",
+    "Telephone",
   ],
   // Game types that remain valid for existing setups/stats but cannot be
   // created or hosted anymore. Acrotopia is covered by Wacky Words' acronym mode.
@@ -95,6 +98,9 @@ module.exports = {
     Battlesnakes: ["Town", "Host"],
     "Dice Wars": ["Military", "Host"],
     "Connect Four": ["Town", "Host"],
+    "Draw It": ["Town"],
+    "Spot It": ["Town"],
+    Telephone: ["Town"],
   },
   startStates: {
     Mafia: ["Night", "Day"],
@@ -110,6 +116,15 @@ module.exports = {
     Battlesnakes: ["Day"],
     "Dice Wars": ["Play"],
     "Connect Four": ["Turn"],
+    "Draw It": ["Pick"],
+    "Spot It": ["Round"],
+    Telephone: ["Write"],
+  },
+  competitiveDefaults: {
+    Mafia: {
+      extendLength: 3,
+      pregameWaitLength: 1,
+    },
   },
   configurableStates: {
     Mafia: {
@@ -237,9 +252,9 @@ module.exports = {
         default: 1 * 60 * 1000,
       },
       Showdown: {
-        min: 10 * 1000,
-        max: 5 * 60 * 1000,
-        default: 10 * 1000,
+        min: 3 * 1000,
+        max: 30 * 1000,
+        default: 5 * 1000,
       },
     },
     Cheat: {
@@ -268,6 +283,37 @@ module.exports = {
         default: 1 * 60 * 1000,
       },
     },
+    "Draw It": {
+      Draw: {
+        min: 30 * 1000,
+        max: 240 * 1000,
+        default: 150 * 1000,
+      },
+    },
+    Telephone: {
+      Write: {
+        min: 45 * 1000,
+        max: 45 * 1000,
+        default: 45 * 1000,
+      },
+      Draw: {
+        min: 30 * 1000,
+        max: 240 * 1000,
+        default: 90 * 1000,
+      },
+      Guess: {
+        min: 45 * 1000,
+        max: 45 * 1000,
+        default: 45 * 1000,
+      },
+    },
+    "Spot It": {
+      Round: {
+        min: 5 * 60 * 1000,
+        max: 15 * 60 * 1000,
+        default: 10 * 60 * 1000,
+      },
+    },
   },
   noQuotes: {},
 
@@ -279,6 +325,12 @@ module.exports = {
   maxFavSetups: 500,
   maxFavRoles: 100,
   maxOwnedAnonymousDecks: 10,
+  maxOwnedWordDecks: 5,
+  minWordDeckSize: 20,
+  maxWordDeckSize: 500,
+  maxWordLength: 30,
+  maxWordDeckNameLength: 25,
+  maxWordDeckDescriptionLength: 120,
   maxOwnedCustomEmotes: 10,
   maxOwnedCustomEmotesExtra: 10,
   maxArchivedGamesMax: 10,

@@ -269,6 +269,44 @@ module.exports = class Player {
       }
     });
 
+    socket.on("drawStroke", (payload) => {
+      try {
+        if (typeof this.game.handleStrokeEvent !== "function") return;
+        if (typeof payload !== "object" || payload === null) return;
+        this.game.handleStrokeEvent(this, "drawStroke", payload);
+      } catch (e) {
+        logger.error(e);
+      }
+    });
+
+    socket.on("endStroke", (payload) => {
+      try {
+        if (typeof this.game.handleStrokeEvent !== "function") return;
+        if (typeof payload !== "object" || payload === null) return;
+        this.game.handleStrokeEvent(this, "endStroke", payload);
+      } catch (e) {
+        logger.error(e);
+      }
+    });
+
+    socket.on("undoStroke", () => {
+      try {
+        if (typeof this.game.handleStrokeEvent !== "function") return;
+        this.game.handleStrokeEvent(this, "undo", {});
+      } catch (e) {
+        logger.error(e);
+      }
+    });
+
+    socket.on("clearCanvas", () => {
+      try {
+        if (typeof this.game.handleStrokeEvent !== "function") return;
+        this.game.handleStrokeEvent(this, "clearCanvas", {});
+      } catch (e) {
+        logger.error(e);
+      }
+    });
+
     socket.on("vote", (vote) => {
       try {
         if (typeof vote != "object") return;
@@ -280,7 +318,16 @@ module.exports = class Player {
 
         if (!Utils.validProp(vote.meetingId)) return;
 
+        var meeting = this.game.getMeeting(vote.meetingId);
+        if (!meeting) return;
+
+        // Ratscrew slaps are intentionally fast and spammy — exempt them
+        // from the vote rate-limit (and don't pollute votePast with them,
+        // so a flurry of slaps doesn't end up penalizing real votes).
+        const skipRateLimit = meeting.name === "Slap";
+
         if (
+          !skipRateLimit &&
           !this.user.isTest &&
           Spam.rateLimit(
             votePast,
@@ -292,10 +339,7 @@ module.exports = class Player {
           return;
         }
 
-        votePast.push(Date.now());
-
-        var meeting = this.game.getMeeting(vote.meetingId);
-        if (!meeting) return;
+        if (!skipRateLimit) votePast.push(Date.now());
 
         const gameStateBeforeVote = this.game.currentState;
         meeting.vote(this, vote.selection);

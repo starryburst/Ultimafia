@@ -315,9 +315,10 @@ module.exports = class RatscrewGame extends Game {
     } else {
       // Invalid slap — burn one card from the slapper, face-down, into the
       // middle of the stack so it doesn't trigger any combinations.
+      // A player with no cards survives a wrong slap; elimination only
+      // happens when the pile is awarded to someone else (see transferPileTo).
       if (player.CardsInHand.length === 0) {
-        this.toast(`${player.name} is out!`);
-        player.kill("Basic", player, true);
+        this.toast(`${player.name} has no cards to burn`);
         this.broadcastExtraInfoUpdate();
         return;
       }
@@ -325,8 +326,31 @@ module.exports = class RatscrewGame extends Game {
       const middle = Math.floor(this.TheStack.length / 2);
       this.TheStack.splice(middle, 0, this.pushStackEntry(burned, true));
       this.toast(`${player.name} burns a card`);
+      // The slapper may have just burned their last card while a face-card
+      // challenge was active. Resolve it now so the game doesn't get stuck
+      // with a defender who has no cards and no playCard event coming.
+      this.maybeResolveStuckChallenge();
       this.broadcastExtraInfoUpdate();
     }
+  }
+
+  // If a face-card challenge is active but the defender (anyone other than
+  // the challenger) is alive with no cards left to attempt, mark the
+  // challenger as the winner immediately. transferPileTo will then
+  // eliminate the now-cardless defender.
+  maybeResolveStuckChallenge() {
+    if (!this.faceChallenge) return false;
+    const challenger = this.faceChallenge.challenger;
+    const defender = this.nextToPlay;
+    if (!defender || defender === challenger) return false;
+    if (!defender.alive) return false;
+    if (defender.CardsInHand.length > 0) return false;
+
+    this.toast(`${challenger.name} wins the pile!`);
+    this.transferPileTo(challenger);
+    this.faceChallenge = null;
+    this.setNextToPlay(challenger);
+    return true;
   }
 
   // Push a fresh extraInfo snapshot to all clients. Used for mid-state
@@ -356,12 +380,38 @@ module.exports = class RatscrewGame extends Game {
     );
     player.CardsInHand.push(...cardValues);
     this.TheStack = [];
+
+    // Pile cleared. Any other alive player with no cards is now eliminated.
+    // Use "silent" killType so the engine's empty death message + generic
+    // role-reveal alert ("X's role is Player.") don't get queued — the
+    // toast above is the only notification we want.
+    for (const p of this.players.array()) {
+      if (p.alive && p !== player && p.CardsInHand.length === 0) {
+        this.toast(`${p.name} is out!`);
+        p.kill("silent", player, true);
+      }
+    }
   }
 
 
   // ---- Card play resolution ----
 
   playCard(actor) {
+    // If we're in a face-card challenge and it's the defender's turn but
+    // they have no cards left to attempt, the challenger wins the pile.
+    if (
+      this.faceChallenge &&
+      actor !== this.faceChallenge.challenger &&
+      actor.CardsInHand.length === 0
+    ) {
+      const challenger = this.faceChallenge.challenger;
+      this.toast(`${challenger.name} wins the pile!`);
+      this.transferPileTo(challenger);
+      this.faceChallenge = null;
+      this.setNextToPlay(challenger);
+      return;
+    }
+
     if (actor.CardsInHand.length === 0) return;
     const card = actor.CardsInHand.shift();
     this.TheStack.push(this.pushStackEntry(card, false));
@@ -379,7 +429,15 @@ module.exports = class RatscrewGame extends Game {
 
     if (this.faceChallenge) {
       this.faceChallenge.attemptsLeft -= 1;
-      if (this.faceChallenge.attemptsLeft <= 0) {
+      // Resolve the challenge if attempts ran out OR the defender just
+      // played their last card. Without the empty-hand short-circuit, the
+      // engine would wait for another playCard from a player who has none
+      // — and the WinIfWithAllCards win-check (defender alive but cardless)
+      // would end the game before the pile is transferred.
+      if (
+        this.faceChallenge.attemptsLeft <= 0 ||
+        actor.CardsInHand.length === 0
+      ) {
         const challenger = this.faceChallenge.challenger;
         this.toast(`${challenger.name} wins the pile!`);
         this.transferPileTo(challenger);

@@ -1444,12 +1444,15 @@ const modifierData = {
   "Secret Dictator": {},
   "Secret Hitler": {},
   "Wacky Words": {},
+  "Draw It": {},
+  Telephone: {},
   "Liars Dice": {},
   "Texas Hold Em": {},
   Cheat: {},
   Ratscrew: {},
   Battlesnakes: {},
   "Connect Four": {},
+  "Spot It": {},
   "Dice Wars": {},
 };
 

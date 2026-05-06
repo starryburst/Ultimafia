@@ -1268,7 +1268,8 @@ export function GameSettingSearch(props) {
     if (!mods) {
       mods = {};
     }
-    const mappedMods = siteInfo.gamesettings[props.gameType].filter(
+    const settings = siteInfo.gamesettings[props.gameType] ?? [];
+    const mappedMods = settings.filter(
       (t) => t.name in mods
     );
     let temp = [];
@@ -1278,7 +1279,7 @@ export function GameSettingSearch(props) {
       }
     }
     const incompatibles = temp;
-    const modifierOptions = siteInfo.gamesettings[props.gameType]
+    const modifierOptions = settings
       .filter((e) => !e.hidden)
       .filter((e) => e.allowDuplicate || !(e.name in mods))
       .filter((e) => !incompatibles.includes(e.name))
@@ -1287,6 +1288,8 @@ export function GameSettingSearch(props) {
   }
 
   if (!siteInfo.gamesettings) return <Loading small />;
+
+  const gameTypeSettings = siteInfo.gamesettings[props.gameType] ?? [];
 
   const alignButtons = ["Standard", "Voting", "Timer", "Other"].map((type) => (
     <Tab
@@ -1297,7 +1300,7 @@ export function GameSettingSearch(props) {
     />
   ));
 
-  const roleCells = siteInfo.gamesettings[props.gameType].map((role, i) => {
+  const roleCells = gameTypeSettings.map((role, i) => {
     const searchTerms = searchVal
       .split(",")
       .filter((term) => term.trim() !== "")

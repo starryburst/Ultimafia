@@ -6390,6 +6390,30 @@ const roleData = {
       description: ["Draws words on their turn and guesses words on others' turns."],
     },
   },
+  Telephone: {
+    Caller: {
+      alignment: "Town",
+      tags: ["None"],
+      description: [
+        "Writes a phrase, draws what you receive, and guesses drawings passed to you.",
+      ],
+    },
+    Eidetiker: {
+      alignment: "Town",
+      tags: ["None"],
+      description: [
+        "Draws a prompt, then reproduces the drawing you receive each round.",
+      ],
+    },
+    Designer: {
+      alignment: "Town",
+      tags: ["None"],
+      description: [
+        "Draw a poster, caption someone else's, then vote in head-to-head matchups.",
+        "Win votes to earn points: 2 for a winning drawing, 1 for a winning caption.",
+      ],
+    },
+  },
   "Liars Dice": {
     Liar: {
       alignment: "Liars",

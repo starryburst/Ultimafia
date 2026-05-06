@@ -313,6 +313,7 @@ const gameSettingData = {
   "Secret Hitler": {},
   "Wacky Words": {},
   "Draw It": {},
+  Telephone: {},
   "Liars Dice": {
     Whispers: {
       category: "Standard",

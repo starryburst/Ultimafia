@@ -417,9 +417,17 @@ export default function CreateSetup(props) {
             useRoleGroups: setup.useRoleGroups,
             roleGroupSizes: setup.roleGroupSizes,
           });
+          const validSettingKeys = new Set(
+            (siteInfo.gamesettings[gameType] ?? []).map((s) => s.name)
+          );
+          const filteredGameSettings = Object.fromEntries(
+            Object.entries(setup.gameSettings || {}).filter(([k]) =>
+              validSettingKeys.has(k)
+            )
+          );
           updateGameSettings({
             type: "setFromSetup",
-            gameSettings: setup.gameSettings,
+            gameSettings: filteredGameSettings,
           });
           var formFieldChanges = [];
 
@@ -787,7 +795,7 @@ export default function CreateSetup(props) {
   return (
     <Stack direction="column" spacing={1}>
       <RoleSearch onAddClick={onAddRole} gameType={gameType} />
-      {siteInfo.modifiers[props.gameType].length > 0 && (
+      {(siteInfo.modifiers[props.gameType]?.length ?? 0) > 0 && (
         <Paper sx={{ p: 1 }}>
           <Accordion>
             <AccordionSummary>
@@ -803,7 +811,7 @@ export default function CreateSetup(props) {
           </Accordion>
         </Paper>
       )}
-      {siteInfo.modifiers[props.gameType].length > 0 && (
+      {(siteInfo.modifiers[props.gameType]?.length ?? 0) > 0 && (
         <StickyStateViewer
           isSticky={modifiers.length > 0}
           title="Selected Modifiers"

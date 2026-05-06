@@ -78,6 +78,7 @@ module.exports = {
     "Connect Four",
     "Draw It",
     "Spot It",
+    "Telephone",
   ],
   // Game types that remain valid for existing setups/stats but cannot be
   // created or hosted anymore. Acrotopia is covered by Wacky Words' acronym mode.
@@ -99,6 +100,7 @@ module.exports = {
     "Connect Four": ["Town", "Host"],
     "Draw It": ["Town"],
     "Spot It": ["Town"],
+    Telephone: ["Town"],
   },
   startStates: {
     Mafia: ["Night", "Day"],
@@ -116,6 +118,7 @@ module.exports = {
     "Connect Four": ["Turn"],
     "Draw It": ["Pick"],
     "Spot It": ["Round"],
+    Telephone: ["Write"],
   },
   competitiveDefaults: {
     Mafia: {
@@ -285,6 +288,23 @@ module.exports = {
         min: 30 * 1000,
         max: 240 * 1000,
         default: 150 * 1000,
+      },
+    },
+    Telephone: {
+      Write: {
+        min: 45 * 1000,
+        max: 45 * 1000,
+        default: 45 * 1000,
+      },
+      Draw: {
+        min: 30 * 1000,
+        max: 240 * 1000,
+        default: 90 * 1000,
+      },
+      Guess: {
+        min: 45 * 1000,
+        max: 45 * 1000,
+        default: 45 * 1000,
       },
     },
     "Spot It": {

@@ -101,6 +101,12 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
+.draw-canvas-wrap--poster .draw-canvas,
+.draw-canvas-wrap--poster canvas {
+  aspect-ratio: 3 / 4;
+  max-width: 300px;
+}
+
 .draw-action-list {
   flex: 0 0 auto;
 }

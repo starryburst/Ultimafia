@@ -20,6 +20,7 @@ const HOST_OPTIONS_VERSIONS = {
   Ratscrew: 2,
   "Connect Four": 2,
   "Spot It": 1,
+  Telephone: 1,
   "Dice Wars": 2,
 };
 
@@ -157,6 +158,11 @@ var defaultOptions = {
     roundAmt: 3,
     wordDeckId: "default",
     drawLength: 60,
+  },
+  Telephone: existingHostOptions["Telephone"] || {
+    ...commonHostOptions,
+    lobby: "Games",
+    drawLength: 90,
   },
   Battlesnakes: existingHostOptions["Battlesnakes"] || {
     ...commonHostOptions,

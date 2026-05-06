@@ -29,7 +29,10 @@ export default function DrawCanvas({
   eraseMode,
   strokes: replayStrokes,
   playhead,
+  portrait,
 }) {
+  const LW = portrait ? 600 : LOGICAL_W;
+  const LH = portrait ? 800 : LOGICAL_H;
   const canvasRef = useRef(null);
   const strokesRef = useRef(initialStrokes ? [...initialStrokes] : []);
   const currentStrokeRef = useRef(null);
@@ -42,9 +45,9 @@ export default function DrawCanvas({
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, LOGICAL_W, LOGICAL_H);
+    ctx.clearRect(0, 0, LW, LH);
     ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
+    ctx.fillRect(0, 0, LW, LH);
 
     // In replay mode, `playhead` caps the number of points drawn across all
     // strokes. If undefined or Infinity, render the full drawing.
@@ -86,7 +89,7 @@ export default function DrawCanvas({
     }
 
     ctx.globalCompositeOperation = "source-over";
-  }, [mode, playhead]);
+  }, [mode, playhead, LW, LH]);
 
   // Replay-mode rendering: draw the supplied strokes (up to `playhead`)
   // directly into the canvas. Self-contained so it doesn't race with the
@@ -99,9 +102,9 @@ export default function DrawCanvas({
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
-    ctx.clearRect(0, 0, LOGICAL_W, LOGICAL_H);
+    ctx.clearRect(0, 0, LW, LH);
     ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
+    ctx.fillRect(0, 0, LW, LH);
 
     const strokes = Array.isArray(replayStrokes) ? replayStrokes : [];
     const pointBudget =
@@ -143,7 +146,7 @@ export default function DrawCanvas({
     ctx.globalCompositeOperation = "source-over";
     // Keep strokesRef in sync for any external reads (none in replay today).
     strokesRef.current = strokes;
-  }, [mode, replayStrokes, playhead]);
+  }, [mode, replayStrokes, playhead, LW, LH]);
 
   // Sync initialStrokes -> strokesRef on state transitions. extraInfo.strokes
   // is stable within a state, so this only fires when the engine ships a new
@@ -209,13 +212,13 @@ export default function DrawCanvas({
   const toLogical = useCallback((evt) => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
-    const x = ((evt.clientX - rect.left) / rect.width) * LOGICAL_W;
-    const y = ((evt.clientY - rect.top) / rect.height) * LOGICAL_H;
+    const x = ((evt.clientX - rect.left) / rect.width) * LW;
+    const y = ((evt.clientY - rect.top) / rect.height) * LH;
     return [
-      Math.max(0, Math.min(LOGICAL_W, x)),
-      Math.max(0, Math.min(LOGICAL_H, y)),
+      Math.max(0, Math.min(LW, x)),
+      Math.max(0, Math.min(LH, y)),
     ];
-  }, []);
+  }, [LW, LH]);
 
   const flushPending = useCallback(() => {
     if (!socket) return;
@@ -280,8 +283,8 @@ export default function DrawCanvas({
     <canvas
       ref={canvasRef}
       className={`draw-canvas draw-canvas-${mode}`}
-      width={LOGICAL_W}
-      height={LOGICAL_H}
+      width={LW}
+      height={LH}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}

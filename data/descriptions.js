@@ -325,6 +325,37 @@ const learnGameDescriptions = [
       },
     ],
   },
+  {
+    gameType: "Telephone",
+    description: [
+      {
+        type: "paragraph",
+        content:
+          "Telephone is a collaborative drawing and writing game inspired by the party game of the same name. Every player simultaneously writes a starting phrase, draws what they receive, and then guesses the next drawing — watching your phrase mutate into something completely unrecognizable by the end.",
+      },
+      {
+        type: "subheading",
+        content: "Game Modes",
+      },
+      {
+        type: "list",
+        items: [
+          {
+            strong: "Caller (default):",
+            text: "Classic telephone. Write a phrase → pass it → draw it → pass the drawing → guess it. Chains reveal at the end.",
+          },
+          {
+            strong: "Eidetiker:",
+            text: "No writing phase. Draw anything → pass the drawing → reproduce it from memory after an 8-second flash. See how well drawings survive copying.",
+          },
+          {
+            strong: "Designer:",
+            text: "Competitive poster mode. Each player draws two posters, then writes captions for two of their neighbors' posters. Posters are matched up head-to-head and everyone votes for the best. Earn 2 points per vote your drawing receives, plus 1 for each vote a caption you wrote receives, with a 2-point bonus for winning a matchup.",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 const learnGameDescriptionByType = learnGameDescriptions.reduce(

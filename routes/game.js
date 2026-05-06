@@ -1360,6 +1360,9 @@ const settingsChecks = {
       deckSize: settings.deckSize || "standard",
     };
   },
+  Telephone: (settings, setup) => {
+    return {};
+  },
 };
 
 module.exports = router;

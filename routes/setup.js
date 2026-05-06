@@ -1537,6 +1537,11 @@ const countChecks = {
     if (total < 2) return "Must have at least 2 players.";
     return true;
   },
+  Telephone: (roles, count, total, closed, unique) => {
+    if (total < 2) return "Telephone needs at least 2 players.";
+    if (total > 12) return "Telephone allows at most 12 players.";
+    return true;
+  },
 };
 
 const optionsChecks = {
@@ -1603,6 +1608,9 @@ const optionsChecks = {
     return setup;
   },
   "Spot It": (setup) => {
+    return setup;
+  },
+  Telephone: (setup) => {
     return setup;
   },
 };

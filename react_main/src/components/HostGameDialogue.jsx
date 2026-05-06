@@ -29,6 +29,7 @@ import HostAcrotopia from "./gameTypeHostForms/HostAcrotopia";
 import HostSecretDictator from "./gameTypeHostForms/HostSecretDictator";
 import HostWackyWords from "./gameTypeHostForms/HostWackyWords";
 import HostDrawIt from "./gameTypeHostForms/HostDrawIt";
+import HostTelephone from "./gameTypeHostForms/HostTelephone";
 import HostLiarsDice from "./gameTypeHostForms/HostLiarsDice";
 import HostTexasHoldEm from "./gameTypeHostForms/HostTexasHoldEm";
 import HostCheat from "./gameTypeHostForms/HostCheat";
@@ -64,6 +65,8 @@ export default function HostGameDialogue({ open, setOpen, setup, preSelectedDeck
         return HostWackyWords();
       case "Draw It":
         return HostDrawIt();
+      case "Telephone":
+        return HostTelephone();
       case "Liars Dice":
         return HostLiarsDice();
       case "Texas Hold Em":

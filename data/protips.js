@@ -39,6 +39,11 @@ const protips = {
     "Once you've guessed, head to the secret chat to celebrate.",
     "Make your own word deck for your group's inside jokes.",
   ],
+  Telephone: [
+    "Write something specific — vague phrases make funnier drawings.",
+    "Watch how your phrase transforms as it passes through everyone.",
+    "The messier the drawing, the funnier the final guess.",
+  ],
   "Liars Dice": [
     "Call it!!!!",
     "99% of gamblers quit before they win big!",
